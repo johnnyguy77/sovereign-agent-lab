@@ -215,7 +215,7 @@ it skipped the vegan count slot and went straight to the deposit amount slot.
 
 # ── Task B: Cutoff guard ───────────────────────────────────────────────────
 
-TASK_B_DONE = None   # True or False
+TASK_B_DONE = True   # True or False
 
 # List every file you changed.
 TASK_B_FILES_CHANGED = ["exercise3_rasa/actions/actions.py"] #line 118 to 123
@@ -265,10 +265,4 @@ SETUP_COST_VALUE = """
 
 The CALM agent can't improvise, it can't call a tool that wasn't defined in flows.yml and it can't make up a response outside its configured flows. When I asked about parking for the garlic mobile it didn't try to help, it just said it can only handle booking confirmations. LangGraph would have tried to answer or at least reasoned about it. But for the confirmation use case that's a feature not a limitation — you don't want the agent that's handling deposits and guest counts to start freelancing. The setup cost buys you predictability, the agent does exactly what you defined and nothing more, which is exactly what you need when real money is involved.
 
-FILL ME IN
-
-Be specific. What can the Rasa CALM agent NOT do that LangGraph could?
-Is that a feature or a limitation for the confirmation use case?
-Think about: can the CALM agent improvise a response it wasn't trained on?
-Can it call a tool that wasn't defined in flows.yml?
 """
