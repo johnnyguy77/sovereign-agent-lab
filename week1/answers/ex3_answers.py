@@ -222,7 +222,8 @@ TASK_B_FILES_CHANGED = ["exercise3_rasa/actions/actions.py"] #line 118 to 123
 
 # How did you test that it works? Min 20 words.
 TASK_B_HOW_YOU_TESTED = """
-FILL ME IN
+I ran a conversation where the guest count was above the cutoff limit to check if the agent would flag it and escalate instead of confirming. I also ran a normal conversation under the limit to make sure it still confirmed as expected and didn't break the happy path.
+
 """
 
 # ── CALM vs Old Rasa ───────────────────────────────────────────────────────
@@ -241,7 +242,9 @@ FILL ME IN
 # Min 30 words.
 
 CALM_VS_OLD_RASA = """
-We are using Rasa Pro CALM which is a more advanced version of Rasa. It uses a language model to understand the user's intent and then uses a flow to execute the action. The language model is able to understand the user's intent and then use the flow to execute the action. The flow is able to execute the action based on the user's intent.
+
+The LLM now handles intent classification and slot extraction — stuff that used to need regex parsing and nlu.yml training examples written by hand. You don't need to anticipate every way someone might say "about 160 guests" because the LLM just gets it. But Python still handles the business rules like deposit limits and capacity checks, because you don't want an LLM deciding whether £500 is an acceptable deposit — that needs to be deterministic and auditable. I'd trust the old approach more for slot extraction honestly, the LLM struggled a few times parsing "about 50" and threw warnings before getting it right, whereas a regex would have nailed it first time every time.
+
 Think about:
 - What does the LLM handle now that Python handled before? - the language model is able to understand the user's intent and then use the flow to execute the action. The flow is able to execute the action based on the user's intent.
 - What does Python STILL handle, and why (hint: business rules)? - tools, business rules like venue capacity and deposit amount.
@@ -259,6 +262,9 @@ Think about:
 # Min 40 words.
 
 SETUP_COST_VALUE = """
+
+The CALM agent can't improvise, it can't call a tool that wasn't defined in flows.yml and it can't make up a response outside its configured flows. When I asked about parking for the garlic mobile it didn't try to help, it just said it can only handle booking confirmations. LangGraph would have tried to answer or at least reasoned about it. But for the confirmation use case that's a feature not a limitation — you don't want the agent that's handling deposits and guest counts to start freelancing. The setup cost buys you predictability, the agent does exactly what you defined and nothing more, which is exactly what you need when real money is involved.
+
 FILL ME IN
 
 Be specific. What can the Rasa CALM agent NOT do that LangGraph could?

@@ -150,7 +150,11 @@ graph TD;
 
 # Compare the LangGraph graph to exercise3_rasa/data/flows.yml. Min 30 words.
 TASK_D_COMPARISON = """
-I can't visualise the  exercise3_rasa/data/flows.yml. file
+The LangGraph graph is completely generic: 
+it's just agent--> tools--> agent in a loop, with no mention of venues or bookings or any specific step. The agent decides at runtime what tool to call and when to stop. 
+The Rasa flows.yml is the opposite, it spells out every step explicitly, collect guest_count, then collect vegan_count, then collect deposit_amount, then validate. 
+You can read the flows.yml and know exactly what the agent will do before it runs. With the LangGraph graph you have no idea what path it will take, which is great for research but terrifying for handling someone's money :)
+
 """
 
 # ── Reflection ─────────────────────────────────────────────────────────────
